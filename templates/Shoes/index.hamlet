@@ -5,5 +5,4 @@
   $forall (Entity shoeid shoe) <- shoes
     <li>
       <a href=@{ShoeR shoeid}>
-        <img res=@{
         #{shoeDescription shoe}

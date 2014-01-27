@@ -6,6 +6,6 @@
 
 / HomeR GET POST
 
-
 /shoes ShoesR GET POST
 /shoe/#ShoeId ShoeR GET
+/files/*[T.Text] FilesR GET
