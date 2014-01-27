@@ -9,4 +9,10 @@ Email
     verkey Text Maybe
     UniqueEmail email
 
+Shoe
+    description Text
+    color Text
+    size Double
+    photo FilePath
+
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)

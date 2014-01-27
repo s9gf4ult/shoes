@@ -5,3 +5,7 @@
 /robots.txt RobotsR GET
 
 / HomeR GET POST
+
+
+/shoes ShoesR GET POST
+/shoe/#ShoeId ShoeR GET
