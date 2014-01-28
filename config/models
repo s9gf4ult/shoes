@@ -12,7 +12,7 @@ Email
 Shoe
     description Text
     color Text
-    size Double
+    size Text
     photo Text
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)

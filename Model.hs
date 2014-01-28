@@ -19,7 +19,7 @@ share [mkPersist sqlOnlySettings, mkMigrate "migrateAll"]
 instance FromJSON Shoe where
   parseJSON val = flip (withObject "Shoe must be json object")
                   val $ \obj -> Shoe
-                                <$> obj .: "description"
-                                <*> obj .: "color"
-                                <*> obj .: "size"
-                                <*> obj .: "photo"
+                                <$> (obj .: "description")
+                                <*> (obj .: "color")
+                                <*> (obj .: "size")
+                                <*> (obj .: "photo")

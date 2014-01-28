@@ -7,8 +7,9 @@ import System.FilePath((</>))
 import qualified Data.ByteString as B
 import qualified Data.Text as T
 
+-- convert photo file path to relative url path
 buildFilePath :: Text -> [Text]
-buildFilePath = undefined
+buildFilePath f = [f]
 
 -- save photo on disc and return file name
 savePhoto :: B.ByteString -> IO Text

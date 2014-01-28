@@ -1,12 +1,15 @@
 module Handler.Shoes where
 
+import Data.Aeson.Parser(json)
+import Data.Aeson.Types(fromJSON, Result(..))
+import Data.Conduit(($$))
+import Data.Conduit.Attoparsec(sinkParser)
 import Import
 import Models.Shoe
 import Network.Wai(requestBody)
-import Data.Aeson.Parser(json)
-import Data.Aeson.Types(fromJSON, Result(..))
-import Data.Conduit.Attoparsec(sinkParser)
-import Data.Conduit(($$))
+-- import qualified Data.Text as T
+import qualified Data.Text.Encoding as T
+import qualified Data.ByteString.Base64 as B64
 
 getShoesR :: Handler Html
 getShoesR = do
@@ -18,16 +21,16 @@ postShoesR = do
   req <- waiRequest
   let body = requestBody req
   j <- liftIO $ body $$ (sinkParser json)
-  let r = do
-        shoe <- fromJSON j
-        photo <- fromJSON j
-        return (shoe, photo)
+  let r = fromJSON j
   case r of
-    Error e -> error e
-    Success (shoe, photo) -> do
-      fname <- liftIO $ savePhoto photo
-      runDB $ insert_ $ shoe{shoePhoto = fname}
-      return ()
+    Error e -> error $ "Could not parse Json as Shoe " ++ e
+    Success shoe -> do
+      let photo = B64.decode $ T.encodeUtf8 $ shoePhoto shoe
+      case photo of
+        Left e -> error $ "Base64 picture is broken: " ++ e
+        Right p -> do
+          fname <- liftIO $ savePhoto p
+          runDB $ insert_ $ shoe{shoePhoto = fname}
 
 getShoeR :: ShoeId -> Handler Html
 getShoeR sid = do
