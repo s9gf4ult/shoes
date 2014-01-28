@@ -1,0 +1,7 @@
+<img src=@{FilesR $ buildFilePath $ shoePhoto shoe}>
+
+<div> color: #{shoeColor shoe}
+<div> size: #{shoeSize shoe}
+
+<p>
+  #{shoeDescription shoe}

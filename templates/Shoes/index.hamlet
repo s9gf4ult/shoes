@@ -5,4 +5,4 @@
   $forall (Entity shoeid shoe) <- shoes
     <li>
       <a href=@{ShoeR shoeid}>
-        #{shoeDescription shoe}
+        <img src=@{FilesR $ buildFilePath $ shoePhoto shoe} height="100" width="100">
